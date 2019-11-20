@@ -16,6 +16,7 @@ function LevelBalls(width, height) {
   this.ctx = this.canv.getContext('2d')
   this.ctx.lineWidth = this.thickness
 }
+
 LevelBalls.prototype.resize = function(width, height) {
   this.maxWidth = width
   this.maxHeight = height
@@ -30,6 +31,7 @@ LevelBalls.prototype.resize = function(width, height) {
     this.balls[i].x = i*(this.width/13 + this.ballRadius) + this.ballRadius * 2
   }
 }
+
 LevelBalls.prototype.draw = function(outputCtx) {
   if (!this.balls.length) return
   
@@ -39,6 +41,7 @@ LevelBalls.prototype.draw = function(outputCtx) {
   }
   outputCtx.drawImage(this.canv, 0, this.y)
 }
+
 LevelBalls.prototype.physics = function() {
   var cnt = 0
   for(var i=0;i<this.balls.length;i++) {
@@ -46,9 +49,11 @@ LevelBalls.prototype.physics = function() {
   }
   return cnt === 10
 }
+
 LevelBalls.prototype.toParticles = function(target) {
   return particalize.call(this, target, this.y, 8, 0.16)
 }
+
 LevelBalls.prototype.shift = function() {
   this.x += this.width/13 + this.ballRadius
 }
@@ -65,6 +70,7 @@ function LevelBall(x, y, colors, r) {
   this.size = 1
   this.targetSize = r || 10
 }
+
 LevelBall.prototype.draw = function(ctx) {
   var width = 10
 
@@ -77,10 +83,12 @@ LevelBall.prototype.draw = function(ctx) {
   }
 
 }
+
 LevelBall.prototype.physics = function() {
   if(this.size < this.targetSize) {
     this.size += 0.2
   }
-  if(this.size >= this.targetSize) return true
+  if(this.size >= this.targetSize) 
+    return true
   return false
 }
